@@ -5,7 +5,7 @@
       <h3 class="m-0 title" style="margin: 15px;">ALL EMAIL JOBS</h3>
     </div>
     <div class="d-flex align-items-center gap-2">
-      <a class="btn btn-info" style="margin: 15px;" (click)="onOpenModal(emailJobs[0], 'add')">
+      <a class="btn btn-secondary" style="margin: 15px;" (click)="onOpenModal(emailJobs[0], 'add')">
         Add Email job!
       </a>
       <form class="form-inline my-0">
@@ -35,8 +35,8 @@
         </div>
         <ul class="list-group-item">
           <li class="list-group-item">
-            Date send: {{emailJob?.dateSend}} <br />
-            Date due: {{emailJob?.dateDue}} <br />
+            Date send: {{ emailJob?.dateSend | date:'dd.MM.yyyy HH:mm' }}<br />
+            Date due: {{ emailJob?.dateDue | date:'dd.MM.yyyy HH:mm' }}<br />
             Time to sent: {{emailJob?.timeToSent}} <br />
             Repetition: {{emailJob?.repetition}} <br />
             Status: {{emailJob?.status}} <br />
@@ -270,10 +270,9 @@
                 {{ repetitive }}
               </div>
             </div>
-
             <div class="modal-footer">
               <button type="button" id='edit-email-form' data-dismiss="modal" class="btn btn-secondary">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
+              <button type="submit"  class="btn btn-primary">Save changes</button>
             </div>
           </form>
         </div>

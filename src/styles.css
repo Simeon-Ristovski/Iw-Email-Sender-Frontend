@@ -9,8 +9,7 @@
 /*          Body               */
 /* =========================== */
 body {
-    margin-top: 20px;
-    background: #c6caf3;
+    background: rgb(175, 174, 174);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -78,7 +77,7 @@ input.form-control:focus, select.form-control:focus, textarea.form-control:focus
 .btn {
     border-radius: 4px;
     font-size: 14px;
-    padding: 8px 16px;
+    padding: 10px 25px;
     transition: background-color 0.3s, border-color 0.3s;
 }
 
@@ -121,7 +120,7 @@ input.form-control:focus, select.form-control:focus, textarea.form-control:focus
 .modal-content {
     border-radius: 8px;
     padding: 15px;
-    background-color: lightblue;
+    background-color: rgb(186, 188, 189);
 }
 
 .modal-header, .modal-footer {
@@ -132,14 +131,14 @@ input.form-control:focus, select.form-control:focus, textarea.form-control:focus
 /*         Navbar              */
 /* =========================== */
 .custom-navbar {
-    background-color: #343a40;
+    background-color: #232f35;
     padding: 10px 20px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     font-weight: 600;
 }
-
 .custom-navbar .navbar-brand {
-    color: #17a2b8 !important;
+    padding-left:40px; ;
+    color: #6cc4bc !important;
     font-size: 20px;
 }
 
@@ -150,7 +149,7 @@ input.form-control:focus, select.form-control:focus, textarea.form-control:focus
 }
 
 .custom-navbar .nav-link:hover {
-    color: #17a2b8 !important;
+    color: #00899e !important;
 }
 
 .custom-navbar .navbar-toggler {
@@ -161,35 +160,87 @@ input.form-control:focus, select.form-control:focus, textarea.form-control:focus
 /*   Login/Register specific   */
 /* =========================== */
 .login-register {
-    margin-top: 50px;
+    margin-top: 50px;  
 }
 
 .user-avatar {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
+}
+.left-content {
+    max-width: 680px;    
+    margin-top: -100px;  
+    margin-left: 90px;    
+}
+
+.left-section {
+    background: #2f3e46;
+    color: white;
+    display: flex;
+    padding: 60px 20px;
+}
+
+.app-name {
+    font-size: 72px;
+    font-weight: 700;
+    color: #6cc4bc;
+}
+
+.app-description {
+    font-size: 30px;
+    line-height: 1.6;
+    color: #a7a7a7;
+}
+.register-note {
+    font-size: 25px;
+    color: #6cc4bc;
+}
+
+@media (max-width: 768px) {
+    .left-content {
+        margin-left: 0;
+        text-align: center;
+        max-width: 100%;
+    }
 }
 
 
-/* Универзален стил за наслови на сите страни */
+
 .title {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
     font-size: 28px;      
     font-weight: 600;       
     text-align: center;     
-    color: #0f7eee;         
     margin: 20px 0;         
     text-transform: uppercase; 
     letter-spacing: 1px;     
     border-bottom: 2px solid;
-    padding-bottom: 10px;    
+    padding-bottom: 10px;
+
+    background: linear-gradient(to right, #006e65,grey);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #deleteAllEmailJobs {
     border-radius: 8px;
     padding: 15px;
     background-color: rgb(252, 57, 57);
+}
+
+.info {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    font-size: 15px;      
+    font-weight: 600;       
+    text-align: center;     
+    margin: 20px 0;         
+    text-transform: uppercase; 
+    letter-spacing: 1px;     
+    border-bottom: 2px solid;
+    padding-bottom: 10px;
+
 }
 

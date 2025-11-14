@@ -21,7 +21,7 @@ export class StatusService {
     public addStatus(status: StatusDtoInsert): Observable<string> {
       return this.http.post(`${this.apiServerUrl}`, status, { responseType: 'text' });
     }
-    public deleteStatus(id: number): Observable<void> {
-      return this.http.delete<void>(`${this.apiServerUrl}/${id}`);
+    public deleteStatus(uuid: string): Observable<void> {
+      return this.http.delete<void>(`${this.apiServerUrl}/${uuid}`);
     }
 }

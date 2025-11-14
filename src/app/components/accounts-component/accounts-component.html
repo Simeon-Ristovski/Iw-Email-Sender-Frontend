@@ -1,1 +1,233 @@
-<p>accounts-component works!</p>
+<div class="container" id="main-container">
+    <div class="d-flex flex-column align-items-center gap-3" style="margin: 50px 0;">
+        <div class="d-flex align-items-center gap-3">
+
+            <h3 class="m-0 title" style="margin: 15px;">ALL ACCOUNTS</h3>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <a class="btn btn-secondary" style="margin: 15px;" (click)="onOpenModalUser(accounts[0], 'add')">
+                Add Account!
+            </a>
+            <form class="form-inline my-0">
+                <input type="search" style="margin: 15px;" (ngModelChange)="searcAcc(key.value)" #key="ngModel" ngModel
+                    name="key" id="searchName" class="form-control" placeholder="Search account...">
+            </form>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div #cardRef class="col-md-10 col-xl-6 mb-4" *ngFor="let account of accounts">
+            <div id="lista" class="card h-100">
+                <div class="card-body">
+
+
+
+                    <p class="card-text title" style="font-weight: bold;">Name:</p>
+                    <p class="card-title info" style="color:black;">{{account?.firstName}}</p>
+
+                    <p class="card-text title" style="font-weight: bold;">Surname:</p>
+                    <p class="card-title info" style="color:black;">{{account?.lastName}}</p>
+
+                    <p class="card-text title" style="font-weight: bold;">Email:</p>
+                    <p class="card-title info" style="color:black;">{{account?.email}}</p>
+                    <div>
+                        <p class="card-text title" style="font-weight: bold;">Roles:</p>
+                        <div *ngFor="let role of account.roles">
+                            <p class="card-title info" style="color:black;">{{role}}</p>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="float-right btn-group btn-group-sm">
+                            <div class="float-right btn-group btn-group-sm">
+                                <div class="d-flex justify-content-center align-items-center" style="width: 470px;">
+                                    <button style="margin: 15px;" type="button" class="btn btn-secondary"
+                                        (click)="onOpenModalUser(account, 'edit')">
+                                        Add role
+                                    </button>
+                                    <button style="margin: 15px;" type="button" class="btn btn-secondary"
+                                        (click)="onOpenModalUser(account, 'removeRole')">
+                                        Remove role
+                                    </button>
+                                    <button style="margin: 15px;" type="button" class="btn btn-secondary"
+                                        (click)="onOpenModalUser(account, 'editAcc')">
+                                        Edit account!
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Notification for no accounts -->
+        <div *ngIf="accounts?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">NO ACCOUNTS FOUND!</h4>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Add Account Modal -->
+<div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog" aria-labelledby="addAccountModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAccountModalLabel">Add Student</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #addAccForm="ngForm" (ngSubmit)="onAddAccount(addAccForm)">
+
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" ngModel name="firstName" class="form-control" id="firstName"
+                            placeholder="Name:" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Surname:</label>
+                        <input type="text" ngModel name="lastName" class="form-control" id="lastName"
+                            placeholder="Surname:" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Email:</label>
+                        <input type="text" ngModel name="email" class="form-control" id="email" placeholder="Email:"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Password:</label>
+                        <input type="password" ngModel name="password" class="form-control" id="password"
+                            placeholder="Password:" required>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" id="add-account-form" class="btn btn-secondary"
+                            data-dismiss="modal">Close</button>
+                        <button [disabled]="addAccForm.invalid" type="submit" class="btn btn-primary">Save
+                            changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add role to Account Modal -->
+<div class="modal fade" id="addRoleToAccountModal" tabindex="-1" role="dialog"
+    aria-labelledby="addRoleToAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addRoleToAccountModalLabel">Add role to Account</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #addRoleForm="ngForm" (ngSubmit)="onEditAccount(editAcc.uuid,addRoleForm)">
+                    <label for="roles">Roles:</label>
+                    <div class="form-group">
+                        <select [(ngModel)]="selectedRole" name="roleName" class="form-control" required>
+                            <option *ngFor="let role of rolesComp" [value]="role.roleName">
+                                {{ role.roleName }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="add-account-role-form" class="btn btn-secondary"
+                            data-dismiss="modal">Close</button>
+                        <button [disabled]="addRoleForm.invalid" type="submit" class="btn btn-primary">Save
+                            changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Remove role to Account Modal -->
+<div class="modal fade" id="removeRoleToAccountModal" tabindex="-1" role="dialog"
+    aria-labelledby="removeRoleToAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="removeRoleToAccountModalLabel">Remove role from Account</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #removeRoleForm="ngForm" (ngSubmit)="onRemoveRoleAccount(editAcc.uuid,removeRoleForm)">
+                    <label for="roles">Roles:</label>
+                    <div class="form-group">
+                        <select [(ngModel)]="selectedRole" name="roleName" class="form-control" required>
+                            <option *ngFor="let role of rolesComp" [value]="role.roleName">
+                                {{ role.roleName }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="remove-account-role-form" class="btn btn-secondary"
+                            data-dismiss="modal">Close</button>
+                        <button [disabled]="removeRoleForm.invalid" type="submit" class="btn btn-primary">Save
+                            changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+ <!-- Edit Account Modal -->
+  <div class="modal fade" id="updateAccountModal" tabindex="-1" role="dialog"
+    aria-labelledby="updateAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateAccountModalLabel">Edit Account</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #editFullAccForm="ngForm" (ngSubmit)="onEditEmailJob(editFullAccForm,editAcc.uuid)">
+
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" ngModel name="firstName" class="form-control" id="firstName" placeholder="Name:"
+                required>
+            </div>
+            <div class="form-group">
+              <label for="name">Surname:</label>
+              <input type="text" ngModel name="lastName" class="form-control" id="lastName" placeholder="Surname:"
+                required>
+            </div>
+            <div class="form-group">
+              <label for="name">Email:</label>
+              <input type="text" ngModel name="email" class="form-control" id="email" placeholder="Email:" required>
+            </div>
+            <div class="form-group">
+              <label for="name">Password:</label>
+              <input type="password" ngModel name="password" class="form-control" id="password" placeholder="Password:"
+                required>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" id='edit-acc-full-form' data-dismiss="modal"
+                class="btn btn-secondary">Close</button>
+              <button type="submit" [disabled]="editFullAccForm.invalid" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

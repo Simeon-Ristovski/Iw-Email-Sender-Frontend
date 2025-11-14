@@ -20,10 +20,7 @@ export class RepetitionService {
   public addRepetition(repetition:RepetitionDtoInsert):Observable<string>{
           return this.http.post(`${this.apiServerUrl}`,repetition, { responseType: 'text' });
   }
-  public deleteRepetition(id:number):Observable<void>{
-        return this.http.delete<void>(`${this.apiServerUrl}/${id}`);
+  public deleteRepetition(uuid:string):Observable<void>{
+        return this.http.delete<void>(`${this.apiServerUrl}/${uuid}`);
   }
-
-
-
 }

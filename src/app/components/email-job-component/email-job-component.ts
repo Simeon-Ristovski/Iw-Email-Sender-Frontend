@@ -34,7 +34,6 @@ export class EmailJobComponent implements OnInit {
     this.getEmailJobs();
     this.getRepetition();
   }
-
   public getEmailJobs(): void {
     const loggedUser = this.authService.getLoggedInUser();
     if (!loggedUser) {
@@ -53,9 +52,6 @@ export class EmailJobComponent implements OnInit {
       }
     );
   }
-
-
-
   public getRepetition(): void {
     this.repetititonService.getRepetition().subscribe(
       (response: Repetition[]) => {
@@ -65,7 +61,6 @@ export class EmailJobComponent implements OnInit {
       }
     );
   }
-
   public onAddEmailJob(addForm: NgForm): void {
     document.getElementById('add-emailJob-form')?.click();
 
@@ -92,7 +87,7 @@ export class EmailJobComponent implements OnInit {
         return;
     }
       const userUuid = loggedUser.uuid; 
-      this.emailJobService.addEmailJob(userUuid, emailJob).subscribe( //add id from user
+      this.emailJobService.addEmailJob(userUuid, emailJob).subscribe( 
         (response: string) => {
           console.log(response);
           this.getEmailJobs();
@@ -113,9 +108,7 @@ export class EmailJobComponent implements OnInit {
           });
         }
       );
-  
   }
-
   public onDeleteEmail(id: string): void {
     this.emailJobService.deleteEmailJob(id).subscribe(
       () => {
@@ -136,7 +129,6 @@ export class EmailJobComponent implements OnInit {
       }
     );
   }
-
   public onEditEmailJob(editForm: NgForm, id: string): void {
     document.getElementById('edit-email-form')?.click();
 
@@ -157,8 +149,14 @@ export class EmailJobComponent implements OnInit {
       repetition: formValue.repetitionObject,
       repetitive: formValue.repetitionString
     };
+    const loggedUser = this.authService.getLoggedInUser();
+    if (!loggedUser) {
+        console.error('No logged in user found');
+        return;
+    }
+      const userUuid = loggedUser.uuid; 
 
-    this.emailJobService.editEmailJob(1, id, emailJob).subscribe( //add account id
+    this.emailJobService.editEmailJob(userUuid, id, emailJob).subscribe( 
       () => {
         this.getEmailJobs();
         Swal.fire({
@@ -179,13 +177,13 @@ export class EmailJobComponent implements OnInit {
       }
     );
   }
-
   public searchEmailJob(key: string): void {
     const results: EmailJob[] = [];
     for (const emailJob of this.emailJobs) {
       if (emailJob.subject.toLowerCase().indexOf(key.toLowerCase()) !== -1
         || emailJob.message.toLowerCase().indexOf(key.toLowerCase()) !== -1
         || emailJob.emailTo.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        || emailJob.uuid.toLowerCase().indexOf(key.toLowerCase()) !== -1
       ) {
         results.push(emailJob);
         this.emailJobFound = true;
@@ -198,9 +196,7 @@ export class EmailJobComponent implements OnInit {
     if (results.length === 0 || !key) {
       this.emailJobFound = false;
     }
-
   }
-
   public onActiveDeactive(setForm: NgForm): void {
     document.getElementById('set-active-deactive-emailJob-form')?.click();
     this.emailJobService.setJobActiveOrDeactive(this.editEmailJob.uuid, setForm.value).subscribe(
@@ -224,7 +220,6 @@ export class EmailJobComponent implements OnInit {
       }
     );
   }
-
   public onRepeatEmailJob(addForm: NgForm): void {
     document.getElementById('repear-emailJob-form')?.click();
 
@@ -240,8 +235,13 @@ export class EmailJobComponent implements OnInit {
       dateDue: dueDate,
       timeToSent: formValue.timeToSent
     };
-
-    this.emailJobService.repeatEmailJob(1, this.editEmailJob.uuid, emailJob).subscribe( // add id from user
+    const loggedUser = this.authService.getLoggedInUser();
+    if (!loggedUser) {
+        console.error('No logged in user found');
+        return;
+    }
+      const userUuid = loggedUser.uuid; 
+    this.emailJobService.repeatEmailJob(userUuid, this.editEmailJob.uuid, emailJob).subscribe( 
       (response: string) => {
         console.log(response);
         this.getEmailJobs();
@@ -263,7 +263,6 @@ export class EmailJobComponent implements OnInit {
       }
     );
   }
-
   public onDeleteAllEmailJobs() {
     this.emailJobService.deleteEmailJobs().subscribe(
       () => {
@@ -285,9 +284,6 @@ export class EmailJobComponent implements OnInit {
       }
     );
   }
-
-
-
   public onOpenModal(emailJob: EmailJob, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
@@ -326,5 +322,4 @@ export class EmailJobComponent implements OnInit {
     container?.appendChild(button);
     button.click();
   }
-
 }

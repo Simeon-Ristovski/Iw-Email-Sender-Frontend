@@ -17,8 +17,8 @@ export class ExceptionEntityService {
   public getExceptionEntityWithId(uuid:string):Observable<ExceptionEntity>{
           return this.http.get<ExceptionEntity>(`${this.apiServerUrl}/${uuid}`);
   }
-  public deleteExceptionEntity(id:number):Observable<void>{
-        return this.http.delete<void>(`${this.apiServerUrl}/${id}`);
+  public deleteExceptionEntity(uuid:string):Observable<void>{
+        return this.http.delete<void>(`${this.apiServerUrl}/${uuid}`);
   }
   public deleteExceptionEntitys():Observable<void>{
         return this.http.delete<void>(`${this.apiServerUrl}`);

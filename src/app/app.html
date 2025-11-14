@@ -1,7 +1,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
 <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
-  <a class="navbar-brand" routerLink="/">Iw Email Sender</a>
+  <a class="navbar-brand" routerLink="emailjobs">Iw Email Sender</a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
     aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -9,25 +9,24 @@
 
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav me-auto">
-      <!-- <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/']">Students</a>
+      <li *ngIf="isLoggedIn" class="me-auto">
+        <a class="navbar-brand" routerLink="/profile-info">Profile info</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/courses']">All Courses</a>
+       <li *ngIf="isLoggedIn" class="me-auto">
+        <a class="navbar-brand" routerLink="/accounts">All accounts</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/accounts']">All Accounts</a>
+       <li *ngIf="isLoggedIn" class="me-auto">
+        <a class="navbar-brand" routerLink="/dashboard">Admin dashboard</a>
       </li>
-
-      <li class="nav-item" *ngIf="!isLoggedIn">
-        <a class="nav-link" [routerLink]="['/login']">Login</a>
+      <li *ngIf="isLoggedIn" class="me-auto">
+        <a class="navbar-brand" routerLink="/exceptions">Exceptions</a>
       </li>
-      <li class="nav-item" *ngIf="isLoggedIn">
-        <a class="nav-link" href="#" (click)="logout(); $event.preventDefault()">Logout</a>
-      </li> -->
+      <li *ngIf="isLoggedIn" class="me-auto">
+        <a class="navbar-brand" routerLink="/login">Log out</a>
+      </li>
     </ul>
   </div>
 </nav>
 
-<!-- Место каде Angular ќе ја прикаже компонентата -->
+
 <router-outlet></router-outlet>

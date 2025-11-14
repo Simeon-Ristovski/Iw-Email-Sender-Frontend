@@ -21,8 +21,8 @@ export class RoleService {
   public addRole(role: RoleDtoInsert): Observable<string> {
     return this.http.post(`${this.apiServerUrl}`, role, { responseType: 'text' });
   }
-  public deleteRole(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/${id}`);
+  public deleteRole(uuid: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiServerUrl}/${uuid}`);
   }
 
 }

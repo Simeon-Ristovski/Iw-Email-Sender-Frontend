@@ -5,6 +5,7 @@ export interface Account{
     id:number;
     uuid:string;
     firstName:string;
+    email:string;
     lastName:string;
-    roles:Role[];
+    roles:String[];
 }

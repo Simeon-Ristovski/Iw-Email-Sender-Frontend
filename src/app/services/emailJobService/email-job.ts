@@ -23,13 +23,13 @@ export class EmailJobService {
       public deleteEmailJob(id: string): Observable<void> {
             return this.http.delete<void>(`${this.apiServerUrl}/${id}`);
       }
-      public editEmailJob(id_acc: number, id_emailJob: string, emailjob: EmailJobDtoInsert): Observable<string> {
+      public editEmailJob(id_acc: string, id_emailJob: string, emailjob: EmailJobDtoInsert): Observable<string> {
             return this.http.put(`${this.apiServerUrl}/acc/${id_acc}/emailid/${id_emailJob}`, emailjob, { responseType: 'text' });
       }
       public setJobActiveOrDeactive(id: string, active: boolean): Observable<string> {
             return this.http.put(`${this.apiServerUrl}/${id}`, active, { responseType: 'text' });
       }
-      public repeatEmailJob(id_acc: number, id: string, emailjob: EmailJobTimeToSendNextInsertDto): Observable<string> {
+      public repeatEmailJob(id_acc: string, id: string, emailjob: EmailJobTimeToSendNextInsertDto): Observable<string> {
             return this.http.post(`${this.apiServerUrl}/${id_acc}/repeat/${id}`, emailjob, { responseType: 'text' });
       }
       public deleteEmailJobs(): Observable<void> {

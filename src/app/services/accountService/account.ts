@@ -26,10 +26,13 @@ export class AccountService{
   public addAccountWithRole(account:AccountRoleDtoInsert):Observable<string>{
         return this.http.post(`${this.apiServerUrl}/add-role`,account, { responseType: 'text' });
   }
-  public addRoleToAccount(id:number,role:RoleDtoInsert):Observable<string>{
+  public addRoleToAccount(id:string,role:RoleDtoInsert):Observable<string>{
         return this.http.post(`${this.apiServerUrl}/${id}/roles`,role, { responseType: 'text' });
   }
-  public editAccount(id:number,account:AccountDtoInsert):Observable<string>{
+  public removeRoleToAccount(id:string,role:RoleDtoInsert):Observable<string>{
+        return this.http.post(`${this.apiServerUrl}/${id}/roles/remove`,role, { responseType: 'text' });
+  }
+  public editAccount(id:string,account:AccountDtoInsert):Observable<string>{
         return this.http.put(`${this.apiServerUrl}/${id}`,account, { responseType: 'text' });
   }
   public deleteAccount(id:number):Observable<void>{
