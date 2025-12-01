@@ -19,6 +19,5 @@ export interface EmailJob{
     state:string;
     maxNumOfTrys:number;
     active:boolean;
-
     emailsTo:string[];
 }

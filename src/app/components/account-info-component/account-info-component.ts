@@ -14,21 +14,20 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './account-info-component.html',
   styleUrl: './account-info-component.css',
 })
-export class AccountInfoComponent implements OnInit{
+export class AccountInfoComponent implements OnInit {
+
+  loggedUser: any;
+  public editAccount: Account = {} as Account;
+
+  constructor(private authService: AuthService, private accountSerivce: AccountService, private router: Router) { }
   
-  loggedUser:any; 
-  public editAccount :Account ={}as Account;
-
-  constructor(private  authService:AuthService,private accountSerivce:AccountService,private router: Router){}
-
   ngOnInit(): void {
-     this.loggedUser = this.authService.getLoggedInUser();
+    this.loggedUser = this.authService.getLoggedInUser();
   }
-  
   public onEditEmailJob(editForm: NgForm, id: string): void {
     document.getElementById('edit-info-acc-form')?.click();
-    const userUuid = this.loggedUser.uuid; 
-    this.accountSerivce.editAccount(userUuid,editForm.value).subscribe( 
+    const userUuid = this.loggedUser.uuid;
+    this.accountSerivce.editAccount(userUuid, editForm.value).subscribe(
       () => {
         Swal.fire({
           icon: "success",
@@ -49,20 +48,18 @@ export class AccountInfoComponent implements OnInit{
       }
     );
   }
-
   public onOpenModal(account: Account, mode: string): void {
-      const container = document.getElementById('main-container');
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.style.display = 'none';
-      button.setAttribute('data-toggle', 'modal');
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
 
-      if (mode === 'edit') {
-        this.editAccount= account;
-        button.setAttribute('data-target', '#editAccountModal');
-      }
-      container?.appendChild(button);
-      button.click();
+    if (mode === 'edit') {
+      this.editAccount = account;
+      button.setAttribute('data-target', '#editAccountModal');
     }
- 
+    container?.appendChild(button);
+    button.click();
+  }
 }

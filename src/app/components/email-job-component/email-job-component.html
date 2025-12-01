@@ -14,8 +14,6 @@
       </form>
     </div>
   </div>
-
-
   <div class="row">
     <div #cardRef class="col-md-10 col-xl-6 mb-4" *ngFor="let emailJob of emailJobs">
       <div id="lista" class="card h-100">
@@ -71,15 +69,12 @@
       </div>
     </div>
   </div>
-  <!-- Notification for no employees -->
+  <!-- Notification for no emailjobs -->
   <div *ngIf="emailJobs?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
     <div class="alert alert-info" role="alert">
       <h4 class="alert-heading">NO Email jobs!</h4>
-      <p>No Email jobs were found.</p>
     </div>
   </div>
-
-
   <div class="d-flex flex-column align-items-center gap-3" style="margin: 50px 0;">
     <div class="d-flex align-items-center gap-3">
 
@@ -91,15 +86,13 @@
                 </button>
     </div>
   </div>
-
-
   <!-- Add Email Modal -->
   <div class="modal fade" id="addEmailJobModal" tabindex="-1" role="dialog" aria-labelledby="addEmailJobModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="addEmailJobModalLabel">Add Student</h5>
+          <h5 class="modal-title" id="addEmailJobModalLabel">Add Email job</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -169,7 +162,6 @@
       </div>
     </div>
   </div>
-
   <!-- Delete Modal -->
   <div class="modal fade" id="deleteEmailModal" tabindex="-1" role="dialog" aria-labelledby="deleteEmailModalLabel"
     aria-hidden="true">
@@ -192,7 +184,6 @@
       </div>
     </div>
   </div>
-
   <!-- Edit Modal -->
   <div class="modal fade" id="updateEmailJobModal" tabindex="-1" role="dialog"
     aria-labelledby="updateEmailJobModalLabel" aria-hidden="true">
@@ -279,8 +270,6 @@
       </div>
     </div>
   </div>
-
-
   <!-- Edit active Email Modal -->
   <div class="modal fade" id="editActiveEmailJobModal" tabindex="-1" role="dialog"
     aria-labelledby="editActiveEmailJobModalLabel" aria-hidden="true">
@@ -297,7 +286,6 @@
             <div class="form-group">
               <label>Status:</label>
               <div class="form-group">
-                <label>Status:</label>
                 <div>
                   <input type="radio" name="active" [value]="true" [(ngModel)]="editEmailJob.active" required>
                   Active
@@ -318,15 +306,13 @@
       </div>
     </div>
   </div>
-
-
   <!-- Repeat Email Modal -->
   <div class="modal fade" id="repeatEmailJobModal" tabindex="-1" role="dialog"
     aria-labelledby="repeatEmailJobModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="repeatEmailJobModalLabel">Repeat email job!</h5>
+          <h5 class="modal-title" id="repeatEmailJobModalLabel">Repeat Email job!</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -372,7 +358,6 @@
       </div>
     </div>
   </div>
-
    <!-- Delete Modal -->
   <div class="modal fade" id="deleteAllEmailModal" tabindex="-1" role="dialog" aria-labelledby="deleteAllEmailModalLabel"
     aria-hidden="true">

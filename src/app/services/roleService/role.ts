@@ -11,18 +11,16 @@ import { RoleDtoInsert } from '../../models/dto/RoleDtoInsert';
 export class RoleService {
   private apiServerUrl = "http://localhost:8080/api/v1/roles";
   constructor(private http: HttpClient) { }
-
   public getRoles(): Observable<Role[]> {
-    return this.http.get<Role[]>(`${this.apiServerUrl}`);
+    return this.http.get<Role[]>(`${this.apiServerUrl}`, {withCredentials: true});
   }
   public getRoleWithId(id: number): Observable<Role> {
-    return this.http.get<Role>(`${this.apiServerUrl}/${id}`);
+    return this.http.get<Role>(`${this.apiServerUrl}/${id}`, {withCredentials: true});
   }
   public addRole(role: RoleDtoInsert): Observable<string> {
-    return this.http.post(`${this.apiServerUrl}`, role, { responseType: 'text' });
+    return this.http.post(`${this.apiServerUrl}`, role, { responseType: 'text', withCredentials: true});
   }
   public deleteRole(uuid: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/${uuid}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/${uuid}`, {withCredentials: true});
   }
-
 }

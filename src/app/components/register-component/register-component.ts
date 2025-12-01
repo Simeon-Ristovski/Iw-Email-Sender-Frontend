@@ -15,9 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './register-component.css',
 })
 export class RegisterComponent {
-
   constructor(private authService: AuthService, private router:Router) { }
-
   onRegister(addForm: NgForm) {
     this.authService.addAccount(addForm.value).subscribe(
       (response:Account)=>{
@@ -38,6 +36,4 @@ export class RegisterComponent {
             }
           );
   }
-
-
 }

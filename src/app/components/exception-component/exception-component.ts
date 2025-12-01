@@ -30,7 +30,6 @@ export class ExceptionComponent implements OnInit{
       }
     );
   }
-
   public onDeleteException(uuid: string) {
       this.exceptionEntityService.deleteExceptionEntity(uuid).subscribe(
         () => {

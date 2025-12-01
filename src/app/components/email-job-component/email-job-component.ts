@@ -45,7 +45,6 @@ export class EmailJobComponent implements OnInit {
 
       (response: EmailJob[]) => {
         response.forEach(emailjob => emailjob.emailsTo = emailjob.emailTo.split(',').map(email => email.trim()))
-        console.log(response);
         this.emailJobs = response;
       }, (error: HttpErrorResponse) => {
         console.error(error.message);
@@ -264,7 +263,13 @@ export class EmailJobComponent implements OnInit {
     );
   }
   public onDeleteAllEmailJobs() {
-    this.emailJobService.deleteEmailJobs().subscribe(
+    const loggedUser = this.authService.getLoggedInUser();
+    if (!loggedUser) {
+        console.error('No logged in user found');
+        return;
+    }
+      const userUuid = loggedUser.uuid; 
+    this.emailJobService.deleteAllForAcc(userUuid).subscribe(
       () => {
         this.getEmailJobs();
         Swal.fire({

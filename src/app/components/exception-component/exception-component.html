@@ -13,7 +13,6 @@
 
         </div>
     </div>
-
     <div id="exceptions-container">
         <div class="d-flex align-items-center gap-3" style="margin-top: 50px; margin-bottom: 50px;">
             <h3 class="m-0 title" style="margin: 15px;">EXCEPTIONS</h3>
@@ -27,7 +26,9 @@
                         <p class="card-title info" >UUID:</p>
                         <p class="card-title title" >{{exception?.uuid}}</p>
                         <p class="card-title info" >Email job UUID:</p>
-                        <p class="card-title title" >{{exception?.jobUUUID}}</p>
+                        <p class="card-title title">
+                            {{ exception?.jobUUUID ? exception.jobUUUID : 'Job was deleted!' }}
+                        </p>
                         <p class="card-title info" >Exception message:</p>
                         <p class="card-title title" >{{exception?.message}}</p>
                         <p class="card-title info" >Date of exception: </p>
@@ -52,15 +53,12 @@
             </div>
         </div>
     </div>
-
-
     <!-- Notification for no exceptions -->
     <div *ngIf="exceptions?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
         <div class="alert alert-info" role="alert">
             <h4 class="alert-heading">NO EXCEPTIONS FOUND!</h4>
         </div>
     </div>
-
     <!-- Delete Exception Modal -->
     <div class="modal fade" id="deleteExceptionModal" tabindex="-1" role="dialog"
         aria-labelledby="deleteExceptionModalLabel" aria-hidden="true">

@@ -10,17 +10,17 @@ import { RepetitionDtoInsert } from '../../models/dto/RepetitionDtoInsert';
 export class RepetitionService {
   private apiServerUrl="http://localhost:8080/api/v1/repetitions";
   constructor(private http:HttpClient){}
-  
+
   public getRepetition():Observable<Repetition[]>{
-        return this.http.get<Repetition[]>(`${this.apiServerUrl}`);
+        return this.http.get<Repetition[]>(`${this.apiServerUrl}`, {withCredentials: true});
   }
   public getRepetitionWithId(id:number):Observable<Repetition>{
-        return this.http.get<Repetition>(`${this.apiServerUrl}/${id}`);
+        return this.http.get<Repetition>(`${this.apiServerUrl}/${id}`, {withCredentials: true});
   }
   public addRepetition(repetition:RepetitionDtoInsert):Observable<string>{
-          return this.http.post(`${this.apiServerUrl}`,repetition, { responseType: 'text' });
+          return this.http.post(`${this.apiServerUrl}`,repetition, { responseType: 'text', withCredentials: true});
   }
   public deleteRepetition(uuid:string):Observable<void>{
-        return this.http.delete<void>(`${this.apiServerUrl}/${uuid}`);
+        return this.http.delete<void>(`${this.apiServerUrl}/${uuid}`, {withCredentials: true});
   }
 }

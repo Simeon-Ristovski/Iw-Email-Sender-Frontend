@@ -22,14 +22,12 @@ export class AccountsComponent implements OnInit {
   public editAcc: Account = {} as Account;
   public selectedRole: string = "";
 
-  constructor(private accountService: AccountService, private roleService: RoleService,private router: Router) {
-
+  constructor(private accountService: AccountService, private roleService: RoleService, private router: Router) {
   }
   ngOnInit(): void {
     this.getAccounts();
     this.getRoles();
   }
-
   public getAccounts(): void {
     this.accountService.getAccounts().subscribe(
       (response: Account[]) => {
@@ -71,10 +69,10 @@ export class AccountsComponent implements OnInit {
       }
     );
   }
-  public onEditAccount(uuid:string,addRoleForm: NgForm): void {
+  public onEditAccount(uuid: string, addRoleForm: NgForm): void {
     document.getElementById('add-account-role-form')?.click();
     const dto = { roleName: this.selectedRole };
-    this.accountService.addRoleToAccount(uuid,dto).subscribe(
+    this.accountService.addRoleToAccount(uuid, dto).subscribe(
       (response: string) => {
         this.getAccounts();
         addRoleForm.reset();
@@ -95,10 +93,10 @@ export class AccountsComponent implements OnInit {
       }
     );
   }
-  public onRemoveRoleAccount(uuid:string,addRoleForm: NgForm): void {
+  public onRemoveRoleAccount(uuid: string, addRoleForm: NgForm): void {
     document.getElementById('remove-account-role-form')?.click();
     const dto = { roleName: this.selectedRole };
-    this.accountService.removeRoleToAccount(uuid,dto).subscribe(
+    this.accountService.removeRoleToAccount(uuid, dto).subscribe(
       (response: string) => {
         this.getAccounts();
         addRoleForm.reset();
@@ -145,46 +143,42 @@ export class AccountsComponent implements OnInit {
       button.setAttribute('data-target', '#addAccountModal');
     }
     if (mode === 'edit') {
-      this.editAcc=account;
+      this.editAcc = account;
       button.setAttribute('data-target', '#addRoleToAccountModal');
     }
     if (mode === 'removeRole') {
-      this.editAcc=account;
+      this.editAcc = account;
       button.setAttribute('data-target', '#removeRoleToAccountModal');
     }
     if (mode === 'editAcc') {
-          this.editAcc= account;
-          button.setAttribute('data-target', '#updateAccountModal');
-        }
+      this.editAcc = account;
+      button.setAttribute('data-target', '#updateAccountModal');
+    }
     container?.appendChild(button);
     button.click();
   }
-
-
-
   public onEditEmailJob(editForm: NgForm, id: string): void {
-      document.getElementById('edit-acc-full-form')?.click();
-      const userUuid = this.editAcc.uuid; 
-      this.accountService.editAccount(userUuid,editForm.value).subscribe( 
-        () => {
-          Swal.fire({
-            icon: "success",
-            title: "Succesfully Edited",
-            html: '<b style="font-size: 20px;">You have successfully edited this account!<br>You will be logged out automatically.</b>',
+    document.getElementById('edit-acc-full-form')?.click();
+    const userUuid = this.editAcc.uuid;
+    this.accountService.editAccount(userUuid, editForm.value).subscribe(
+      () => {
+        Swal.fire({
+          icon: "success",
+          title: "Succesfully Edited",
+          html: '<b style="font-size: 20px;">You have successfully edited this account!<br>You will be logged out automatically.</b>',
+          confirmButtonText: 'OK'
+        })
+        this.router.navigate(['/login']);
+      }, (error: HttpErrorResponse) => {
+        Swal.fire(
+          {
+            icon: "error",
+            title: "ERROR",
+            html: `<b style="font-size: 20px;">Email job can\'t be edited! </b><br><i>${error.error}</i>`,
             confirmButtonText: 'OK'
-          })
-          this.router.navigate(['/login']);
-        }, (error: HttpErrorResponse) => {
-          Swal.fire(
-            {
-              icon: "error",
-              title: "ERROR",
-              html: `<b style="font-size: 20px;">Email job can\'t be edited! </b><br><i>${error.error}</i>`,
-              confirmButtonText: 'OK'
-            }
-          )
-        }
-      );
-    }
-
+          }
+        )
+      }
+    );
+  }
 }

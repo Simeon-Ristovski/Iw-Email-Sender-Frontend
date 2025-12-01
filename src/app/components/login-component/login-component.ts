@@ -14,15 +14,11 @@ import { AuthService } from '../../services/authService/auth-service';
 export class LoginComponent implements OnInit {
   email = '';
   password = '';
-
   constructor(private authService: AuthService, private router: Router) { }
-
   ngOnInit(): void {
     this.authService.logout().subscribe();
   }
-
   onLogin() {
-    console.log(this.email, this.password)
     this.authService.login(this.email, this.password).subscribe({
       next: () => {
         this.router.navigate(['/emailjobs']);

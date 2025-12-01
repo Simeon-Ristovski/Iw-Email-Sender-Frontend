@@ -26,7 +26,6 @@ export class AdminDashboardComponent implements OnInit {
   public roleFound:boolean=true;
   public statusFound:boolean=true;
   public repetitionFound:boolean=true;
-
   public deletedRole: Role = {} as Role;
   public deletedStatus: Status = {} as Status;
   public deletedRepetition: Repetition = {} as Repetition;

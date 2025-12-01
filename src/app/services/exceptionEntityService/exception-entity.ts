@@ -10,18 +10,16 @@ import { ExceptionEntity } from '../../models/ExceptionEntity';
 export class ExceptionEntityService {
   private apiServerUrl="http://localhost:8080/api/v1/exceptions";
   constructor(private http:HttpClient){}
-
   public getExceptions():Observable<ExceptionEntity[]>{
-          return this.http.get<ExceptionEntity[]>(`${this.apiServerUrl}`);
+          return this.http.get<ExceptionEntity[]>(`${this.apiServerUrl}`, {withCredentials: true});
     }
   public getExceptionEntityWithId(uuid:string):Observable<ExceptionEntity>{
-          return this.http.get<ExceptionEntity>(`${this.apiServerUrl}/${uuid}`);
+          return this.http.get<ExceptionEntity>(`${this.apiServerUrl}/${uuid}`, {withCredentials: true});
   }
   public deleteExceptionEntity(uuid:string):Observable<void>{
-        return this.http.delete<void>(`${this.apiServerUrl}/${uuid}`);
+        return this.http.delete<void>(`${this.apiServerUrl}/${uuid}`, {withCredentials: true});
   }
   public deleteExceptionEntitys():Observable<void>{
-        return this.http.delete<void>(`${this.apiServerUrl}`);
+        return this.http.delete<void>(`${this.apiServerUrl}`, {withCredentials: true});
   }
-
 }

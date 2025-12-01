@@ -31,34 +31,28 @@ export class AuthService {
     public addAccount(account: Account): Observable<Account> {
         return this.http.post<Account>(`http://localhost:8080/api/v1/auth/register`, account, { withCredentials: true });
     }
-
-   logout(): Observable<any> {
-    return this.http.post('http://localhost:8080/api/v1/auth/logout', {}, { responseType: 'text', withCredentials: true })
-        .pipe(
-            tap(() => {
-                if (this.isBrowser) {
-                    sessionStorage.removeItem('user'); // чистење на session
-                }
-                this.isLoggedInSubject.next(false); // известување на сите компоненти дека нема најавен корисник
-            })
-        );
-}
-
-
-
+    logout(): Observable<any> {
+        return this.http.post('http://localhost:8080/api/v1/auth/logout', {}, { responseType: 'text', withCredentials: true })
+            .pipe(
+                tap(() => {
+                    if (this.isBrowser) {
+                        sessionStorage.removeItem('user'); // чистење на session
+                    }
+                    this.isLoggedInSubject.next(false); // известување на сите компоненти дека нема најавен корисник
+                })
+            );
+    }
     getLoggedInUser(): Account | null {
         if (!this.isBrowser) return null;
         const userJson = sessionStorage.getItem('user');
         return userJson ? JSON.parse(userJson) : null;
     }
-
     getLoggedInStatus(): Observable<boolean> {
         return this.isLoggedInSubject.asObservable();
     }
     checkSession(): Observable<any> {
         return this.http.get(`http://localhost:8080/api/v1/auth/session`, { withCredentials: true });
     }
-
     setLoggedIn(value: boolean) {
         this.isLoggedInSubject.next(value);
     }

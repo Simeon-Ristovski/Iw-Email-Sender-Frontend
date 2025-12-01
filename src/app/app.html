@@ -12,13 +12,16 @@
       <li *ngIf="isLoggedIn" class="me-auto">
         <a class="navbar-brand" routerLink="/profile-info">Profile info</a>
       </li>
-       <li *ngIf="isLoggedIn" class="me-auto">
+       <li *ngIf="isLoggedIn && loggedUser?.roles?.includes('ADMINISTRATOR')" class="me-auto">
         <a class="navbar-brand" routerLink="/accounts">All accounts</a>
       </li>
-       <li *ngIf="isLoggedIn" class="me-auto">
+      <li *ngIf="isLoggedIn && loggedUser?.roles?.includes('ADMINISTRATOR')" class="me-auto">
+        <a class="navbar-brand" routerLink="/allemails">All emails</a>
+      </li>
+       <li *ngIf="isLoggedIn && loggedUser?.roles?.includes('ADMINISTRATOR')" class="me-auto">
         <a class="navbar-brand" routerLink="/dashboard">Admin dashboard</a>
       </li>
-      <li *ngIf="isLoggedIn" class="me-auto">
+      <li *ngIf="isLoggedIn && loggedUser?.roles?.includes('ADMINISTRATOR')"  class="me-auto">
         <a class="navbar-brand" routerLink="/exceptions">Exceptions</a>
       </li>
       <li *ngIf="isLoggedIn" class="me-auto">
